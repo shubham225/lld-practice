@@ -20,8 +20,8 @@ public class Bot extends Player {
         List<Cell> availableCells = board.getAvailableCells();
         Random random = new Random();
         int indx = random.nextInt();
-        indx %= availableCells.size();
         indx = Math.abs(indx);
+        indx %= availableCells.size();
         Cell cell = availableCells.get(indx);
         return cell.getPosition();
     }

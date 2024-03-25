@@ -10,8 +10,8 @@ public class GameService {
     public void startGame() {
         Board board = new Board(3);
         List<Player> playerList = new ArrayList<>();
-        Player player1 = new HumanPlayer("pqr", 'x');
-        Player player2 = new Bot("xyz", 'o');
+        Player player1 = new HumanPlayer("shubham", 'x');
+        Player player2 = new Bot("bot", 'o');
         playerList.add(player1);
         playerList.add(player2);
 
