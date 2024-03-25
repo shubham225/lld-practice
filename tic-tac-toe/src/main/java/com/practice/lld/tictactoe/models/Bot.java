@@ -5,11 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Random;
+
 @Getter
 @Setter
 public class Bot extends Player {
+    public Bot(String name, char symbol) {
+        this.name = name;
+        this.symbol = symbol;
+    }
     @Override
-    public Position play() {
-        return new Position(1, 2);
+    public Position play(Board board) {
+        List<Cell> availableCells = board.getAvailableCells();
+        Random random = new Random();
+        int indx = random.nextInt();
+        indx %= availableCells.size();
+        indx = Math.abs(indx);
+        Cell cell = availableCells.get(indx);
+        return cell.getPosition();
     }
 }

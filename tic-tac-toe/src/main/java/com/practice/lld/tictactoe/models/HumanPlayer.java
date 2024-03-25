@@ -17,7 +17,7 @@ public class HumanPlayer extends Player {
         this.symbol = symbol;
     }
     @Override
-    public Position play() {
+    public Position play(Board board) {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter row : ");
         int row = in.nextInt();

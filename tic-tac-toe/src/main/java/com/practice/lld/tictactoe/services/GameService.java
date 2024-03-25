@@ -11,7 +11,7 @@ public class GameService {
         Board board = new Board(3);
         List<Player> playerList = new ArrayList<>();
         Player player1 = new HumanPlayer("pqr", 'x');
-        Player player2 = new HumanPlayer("xyz", 'o');
+        Player player2 = new Bot("xyz", 'o');
         playerList.add(player1);
         playerList.add(player2);
 
@@ -20,7 +20,7 @@ public class GameService {
 
         while(game.gameIsInProgress()) {
             Player player = game.getNextPlayer();
-            Position position = player.play();
+            Position position = player.play(board);
             Board board1 = game.getBoard();
 
             if(board1.markPosition(position, player)) {

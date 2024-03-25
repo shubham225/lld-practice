@@ -1,8 +1,13 @@
 package com.practice.lld.tictactoe.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Board {
     private List<List<Cell>> cells;
 
@@ -16,6 +21,21 @@ public class Board {
             }
         }
     }
+
+    public List<Cell> getAvailableCells() {
+        int size = this.cells.size();
+        List<Cell> cellList = new ArrayList<>();
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                Cell cell = this.cells.get(i).get(i);
+                if(cell.getStatus() == CellStatus.AVAILABLE)
+                    cellList.add(cell);
+            }
+        }
+        return cellList;
+    }
+
     public void printBoard() {
         for(int i = 0; i < cells.size(); i++) {
             for(int j = 0; j < cells.get(i).size(); j++) {

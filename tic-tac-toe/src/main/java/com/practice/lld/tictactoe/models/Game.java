@@ -1,7 +1,9 @@
 package com.practice.lld.tictactoe.models;
 
+import com.practice.lld.tictactoe.services.PlayService;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class Game {
 
     public boolean play() {
         Player player = getNextPlayer();
-        Position position = player.play();
+        Position position = player.play(board);
         return board.markPosition(position, player);
     }
 
