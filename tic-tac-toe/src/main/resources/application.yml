@@ -1,1 +1,8 @@
-spring.application.name=low-level-design
+# Server Configurations
+server:
+  port: 9020
+
+# Spring Configurations
+spring:
+  application:
+    name: low-level-design
