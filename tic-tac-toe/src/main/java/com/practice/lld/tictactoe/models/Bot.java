@@ -21,6 +21,7 @@ public class Bot extends Player {
         indx = Math.abs(indx);
         indx %= availableCells.size();
         Cell cell = availableCells.get(indx);
+
         return new Move(this, cell);
     }
 }

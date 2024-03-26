@@ -9,8 +9,8 @@ public class GameService {
     public void startGame() {
         Board board = new Board(3);
         List<Player> playerList = new ArrayList<>();
-        Player player1 = new Human("shubham", 'x');
-        Player player2 = new Bot("bot", 'o');
+        Player player1 = new Human("Shubham", 'X');
+        Player player2 = new Bot("Bot", 'O');
         playerList.add(player1);
         playerList.add(player2);
 
@@ -18,13 +18,11 @@ public class GameService {
         game.printGame();
 
         while(game.gameIsInProgress()) {
-            Player player = game.getNextPlayer();
-            Move move = player.play(board);
-            Board board1 = game.getBoard();
-
-            if(board1.makeMove(move)) {
-                if (game.checkGameEnd(move, player))
+            if(game.play()) {
+                if (game.checkGameEnd(game.getLastMove(), game.getCurrentPlayer()))
                     break;
+
+                game.askUndo();
                 game.updateNextPlayer();
                 game.printGame();
             }else {
@@ -33,8 +31,11 @@ public class GameService {
         }
 
         if(game.getStatus() == GameStatus.FINISHED) {
+            System.out.println(" ");
+            System.out.println("-----------------------------");
             game.getBoard().printBoard();
             System.out.println("'" + game.getWinner().getName() + "' wins");
+            System.out.println("-----------------------------");
         }else {
             System.out.println("It's a draw");
         }

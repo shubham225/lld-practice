@@ -68,7 +68,6 @@ public class Board {
 
         if(x == y || (x == cells.size()-1 && y == 0) || (x == 0 && y == cells.size()-1)) {
             //first diagonal
-            won = true;
             int a = 0;
             int b = 0;
             for(int i = 0; i < cells.size(); i++) {
@@ -99,9 +98,9 @@ public class Board {
         }
 
         won = true;
-        for(int i = 0; i < cells.size(); i++) {
-            char ch = cells.get(i).get(y).getSymbol();
-            if(ch != player.getSymbol()) {
+        for (List<Cell> cellList : cells) {
+            char ch = cellList.get(y).getSymbol();
+            if (ch != player.getSymbol()) {
                 won = false;
                 break;
             }
@@ -121,9 +120,8 @@ public class Board {
         if(won) return GameStatus.FINISHED;
 
 
-        for(int i = 0; i < cells.size(); i++) {
-            for(int j = 0; j < cells.get(i).size(); j++) {
-                Cell cell = cells.get(i).get(j);
+        for (List<Cell> list : cells) {
+            for (Cell cell : list) {
                 if (cell.getPlayer() == null) {
                     allCellsFilled = false;
                     break;
@@ -135,5 +133,11 @@ public class Board {
             return GameStatus.DRAW;
         else
             return (won) ? GameStatus.FINISHED : GameStatus.IN_PROGRESS;
+    }
+
+    public void undoMove(Move move) {
+        Cell cell = move.getCell();
+        cell.setPlayer(null);
+        cell.setStatus(CellStatus.AVAILABLE);
     }
 }
