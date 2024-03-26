@@ -11,7 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class Player {
     protected String name;
-    protected char symbol;
+    protected String symbol;
 
-    public abstract Move play(Board board);
+    public abstract Move decideAndPlayMove(Board board);
+    public boolean isSymbolEquals(String symbol) {
+        return this.symbol.equals(symbol);
+    }
 }

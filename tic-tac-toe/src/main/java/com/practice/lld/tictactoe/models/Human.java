@@ -1,5 +1,7 @@
 package com.practice.lld.tictactoe.models;
 
+import com.practice.lld.tictactoe.services.GamePlayFactory;
+import com.practice.lld.tictactoe.services.GamePlayStategy;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,17 +11,13 @@ import java.util.Scanner;
 @Setter
 public class Human extends Player {
     public Human() {}
-    public Human(String name, char symbol) {
+    public Human(String name, String symbol) {
         this.name = name;
         this.symbol = symbol;
     }
     @Override
-    public Move play(Board board) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter row : ");
-        int row = in.nextInt();
-        System.out.println("Enter col : ");
-        int col = in.nextInt();
-        return new Move(this, board.getCell(row, col));
+    public Move decideAndPlayMove(Board board) {
+        GamePlayStategy gamePlay = GamePlayFactory.getGamePlayStrategy(PlayerType.HUMAN);
+        return gamePlay.play(board, this);
     }
 }

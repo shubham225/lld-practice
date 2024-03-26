@@ -19,7 +19,7 @@ public class Cell {
         this.player = null;
     }
 
-    public char getSymbol() {
-        return (player != null) ? player.getSymbol() : ' ';
+    public String getSymbol() {
+        return (player != null) ? player.getSymbol() : " ";
     }
 }

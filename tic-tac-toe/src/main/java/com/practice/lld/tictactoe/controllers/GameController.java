@@ -20,15 +20,17 @@ public class GameController {
             path = "/play"
     )
     public Board getGameBoard() {
-        Board board = new Board(2);
         List<Player> playerList = new ArrayList<>();
-        Player player1 = new Human("shubham", 'x');
-        Player player2 = new Human("shubham", 'x');
+        Player player1 = new Human("shubham", "x");
+        Player player2 = new Human("shubham", "0");
         playerList.add(player1);
         playerList.add(player2);
 
-        Game game = new Game(board, playerList);
+        Game game = Game.builder()
+                        .setBoardSize(3)
+                        .setPlayers(playerList)
+                        .build();
 
-        return board;
+        return game.getBoard();
     }
 }
