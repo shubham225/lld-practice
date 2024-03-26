@@ -13,6 +13,7 @@ public class Board {
 
     public Board(int size) {
         this.cells = new ArrayList<>();
+
         for(int i = 0; i < size; i++) {
             this.cells.add(new ArrayList<>());
             for(int j = 0; j < size; j++) {
@@ -23,39 +24,35 @@ public class Board {
     }
 
     public List<Cell> getAvailableCells() {
-        int size = this.cells.size();
-        List<Cell> cellList = new ArrayList<>();
+        List<Cell> availableCells = new ArrayList<>();
 
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                Cell cell = this.cells.get(i).get(j);
-                if(cell.getStatus() == CellStatus.AVAILABLE)
-                    cellList.add(cell);
+        for (List<Cell> list : this.cells) {
+            for (Cell cell : list) {
+                if (cell.getStatus() == CellStatus.AVAILABLE)
+                    availableCells.add(cell);
             }
         }
-        return cellList;
+        return availableCells;
     }
 
     public void printBoard() {
-        for(int i = 0; i < cells.size(); i++) {
-            for(int j = 0; j < cells.get(i).size(); j++) {
-                Cell cell = cells.get(i).get(j);
+        for (List<Cell> list : cells) {
+            for (Cell cell : list) {
                 System.out.print("|" + cell.getSymbol() + "|");
             }
             System.out.println(" ");
         }
     }
 
-    public Cell getCell(Position position) {
-        Cell cell = cells.get(position.getRow()).get(position.getCol());
-        return cell;
+    public Cell getCell(int row, int col) {
+        return cells.get(row).get(col);
     }
 
-    public boolean markPosition(Position position, Player player) {
-        Cell cell = getCell(position);
+    public boolean makeMove(Move move) {
+        Cell cell = move.getCell();
+
         if(cell.getStatus() == CellStatus.AVAILABLE) {
-            cell.setPosition(position);
-            cell.setPlayer(player);
+            cell.setPlayer(move.getPlayer());
             cell.setStatus(CellStatus.MARKED);
             return true;
         }
@@ -63,11 +60,11 @@ public class Board {
         return false;
     }
 
-    public GameStatus checkWin(Position position, Player player) {
+    public GameStatus checkWin(Move move, Player player) {
         boolean allCellsFilled = true;
         boolean won = true;
-        int x = position.getRow();
-        int y = position.getCol();
+        int x = move.getCell().getRow();
+        int y = move.getCell().getCol();
 
         if(x == y || (x == cells.size()-1 && y == 0) || (x == 0 && y == cells.size()-1)) {
             //first diagonal

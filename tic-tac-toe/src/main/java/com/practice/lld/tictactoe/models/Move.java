@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Position {
-    private int row;
-    private int col;
+public class Move {
+    private Player player;
+    private Cell cell;
 }

@@ -13,5 +13,5 @@ public abstract class Player {
     protected String name;
     protected char symbol;
 
-    public abstract Position play(Board board);
+    public abstract Move play(Board board);
 }

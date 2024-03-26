@@ -11,12 +11,12 @@ public class PlayService {
         return true;
     }
 
-    public GameStatus checkWin(Board board, Position position, Player player) {
+    public GameStatus checkWin(Board board, Move move, Player player) {
         // TODO: Modify the logic for identification of winner
         boolean allCellsFilled = true;
         boolean won = true;
-        int x = position.getRow();
-        int y = position.getCol();
+        int x = move.getCell().getRow();
+        int y = move.getCell().getCol();
         List<List<Cell>> cells = board.getCells();
 
         if(x == y || (x == cells.size()-1 && y == 0) || (x == 0 && y == cells.size()-1)) {

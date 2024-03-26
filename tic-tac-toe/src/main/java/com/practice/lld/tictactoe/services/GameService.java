@@ -1,7 +1,6 @@
 package com.practice.lld.tictactoe.services;
 
 import com.practice.lld.tictactoe.models.*;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ public class GameService {
     public void startGame() {
         Board board = new Board(3);
         List<Player> playerList = new ArrayList<>();
-        Player player1 = new HumanPlayer("shubham", 'x');
+        Player player1 = new Human("shubham", 'x');
         Player player2 = new Bot("bot", 'o');
         playerList.add(player1);
         playerList.add(player2);
@@ -20,11 +19,11 @@ public class GameService {
 
         while(game.gameIsInProgress()) {
             Player player = game.getNextPlayer();
-            Position position = player.play(board);
+            Move move = player.play(board);
             Board board1 = game.getBoard();
 
-            if(board1.markPosition(position, player)) {
-                if (game.checkGameEnd(position, player))
+            if(board1.makeMove(move)) {
+                if (game.checkGameEnd(move, player))
                     break;
                 game.updateNextPlayer();
                 game.printGame();
@@ -35,7 +34,7 @@ public class GameService {
 
         if(game.getStatus() == GameStatus.FINISHED) {
             game.getBoard().printBoard();
-            System.out.println("Player '" + game.getWinner().getName() + "' wins");
+            System.out.println("'" + game.getWinner().getName() + "' wins");
         }else {
             System.out.println("It's a draw");
         }

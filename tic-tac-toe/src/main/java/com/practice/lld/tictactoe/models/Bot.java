@@ -1,8 +1,6 @@
 package com.practice.lld.tictactoe.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -16,13 +14,13 @@ public class Bot extends Player {
         this.symbol = symbol;
     }
     @Override
-    public Position play(Board board) {
+    public Move play(Board board) {
         List<Cell> availableCells = board.getAvailableCells();
         Random random = new Random();
         int indx = random.nextInt();
         indx = Math.abs(indx);
         indx %= availableCells.size();
         Cell cell = availableCells.get(indx);
-        return cell.getPosition();
+        return new Move(this, cell);
     }
 }

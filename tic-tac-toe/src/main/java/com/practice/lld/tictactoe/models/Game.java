@@ -1,38 +1,45 @@
 package com.practice.lld.tictactoe.models;
 
-import com.practice.lld.tictactoe.services.PlayService;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 public class Game {
     private Board board;
-    private int noOfPlayers;
-    private Player winner;
-    private int nextPlayerId;
-    private GameStatus status;
     private List<Player> players;
+    private List<Move> moves;
+    private Player winner;
+    private int nextPlayerIndex;
+    private GameStatus status;
 
-    public Game() {}
+    public Game() {
+        this.board = null;
+        this.players = new ArrayList<>();
+        this.status = GameStatus.IN_PROGRESS;
+        this.moves = new ArrayList<>();
+        this.nextPlayerIndex = 0;
+        this.winner = null;
+    }
+
     public Game(Board board, List<Player> players) {
         this.board = board;
         this.players = players;
-        noOfPlayers = this.players.size();
-        status = GameStatus.IN_PROGRESS;
-        nextPlayerId = 0;
-        winner = null;
+        this.status = GameStatus.IN_PROGRESS;
+        this.moves = new ArrayList<>();
+        this.nextPlayerIndex = 0;
+        this.winner = null;
     }
 
     public Player getNextPlayer() {
-        return players.get(nextPlayerId);
+        return players.get(nextPlayerIndex);
     }
 
     public void updateNextPlayer() {
-        nextPlayerId = (nextPlayerId + 1) % (players.size());
+        nextPlayerIndex = (nextPlayerIndex + 1) % (players.size());
     }
 
     public boolean gameIsInProgress() {
@@ -41,17 +48,24 @@ public class Game {
 
     public boolean play() {
         Player player = getNextPlayer();
-        Position position = player.play(board);
-        return board.markPosition(position, player);
+        Move move = player.play(board);
+
+        if (board.makeMove(move)) {
+            moves.add(move);
+            return true;
+        }
+
+        return false;
     }
 
     public void printGame() {
-        System.out.println("Plying Player : " + getNextPlayer().getName());
+        System.out.println("'" + getNextPlayer().getName() + "'s' Turn");
         board.printBoard();
     }
 
-    public boolean checkGameEnd(Position position, Player player) {
-        status = board.checkWin(position, player);
+    public boolean checkGameEnd(Move move, Player player) {
+        // TODO: Update Code
+        status = board.checkWin(move, player);
         if(status == GameStatus.FINISHED) {
             winner = player;
         }

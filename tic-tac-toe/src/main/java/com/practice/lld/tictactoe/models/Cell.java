@@ -7,20 +7,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Cell {
-    private Position position;
+    private int row;
+    private int col;
     private CellStatus status;
     private Player player;
 
     public Cell(int row, int col) {
-        this.position = new Position(row, col);
+        this.row = row;
+        this.col = col;
         this.status = CellStatus.AVAILABLE;
         this.player = null;
-    }
-
-    public Cell(Position position, CellStatus status, Player player) {
-        this.position = position;
-        this.status = status;
-        this.player = player;
     }
 
     public char getSymbol() {
