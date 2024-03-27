@@ -20,6 +20,6 @@ public class Cell {
     }
 
     public String getSymbol() {
-        return (player != null) ? player.getSymbol() : " ";
+        return (player != null) ? player.getSymbol() : "  ";
     }
 }

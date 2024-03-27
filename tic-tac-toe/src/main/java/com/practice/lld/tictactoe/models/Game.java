@@ -59,8 +59,12 @@ public class Game {
     }
 
     public void printGame() {
+        System.out.println(" ");
+        System.out.println("-------------");
         System.out.println("'" + getNextPlayer().getName() + "'s' Turn");
+        System.out.println("-------------");
         board.printBoard();
+        System.out.println(" ");
     }
 
     public Move getLastMove() {

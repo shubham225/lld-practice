@@ -18,10 +18,6 @@ public class Application {
 
 		List<Player> playerList = new ArrayList<>();
 		boolean undoAllowed = getUserInput(playerList);
-//		Player player1 = new Human("Shubham", "✖\uFE0F");
-//		Player player2 = new Bot("Bot", "⭕");
-//		playerList.add(player1);
-//		playerList.add(player2);
 		Game game = null;
 
 		try {
@@ -35,20 +31,32 @@ public class Application {
 			System.out.println(e.getMessage());
 		}
 
-//		GameService gameService = new GameService();
-//		gameService.startGame();
 	}
 
 	public static boolean getUserInput(List<Player> players){
 		Scanner in = new Scanner(System.in);
 		boolean undoEnabled = false;
 		boolean isBot = false;
+		boolean defaultPlayers = false;
 
 		System.out.println("Do you want to allow undo the move? (Y/N)");
 		char c = in.next().charAt(0);
 
 		if(c == 'Y' || c == 'y') {
 			undoEnabled = true;
+		}
+
+		System.out.println("Do you want to use default players? (Y/N)");
+		c = in.next().charAt(0);
+
+		if(c == 'Y' || c == 'y') {
+			defaultPlayers = true;
+		}
+
+		if(defaultPlayers) {
+			players.add(new Human("Player", "\uD83D\uDE0E"));
+			players.add(new Bot("Bot", "\uD83E\uDD16"));
+			return undoEnabled;
 		}
 
 		System.out.println("How many players will play? :");
