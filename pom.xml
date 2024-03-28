@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>tic-tac-toe</module>
+        <module>parking-lot</module>
     </modules>
 
     <properties>
