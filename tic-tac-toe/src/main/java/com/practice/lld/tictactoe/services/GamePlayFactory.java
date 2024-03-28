@@ -5,7 +5,6 @@ import com.practice.lld.tictactoe.services.strategies.BotEasyGamePlay;
 import com.practice.lld.tictactoe.services.strategies.HumanGamePlay;
 import org.springframework.stereotype.Service;
 
-@Service
 public class GamePlayFactory {
     public static GamePlayStategy getGamePlayStrategy(PlayerType playerType) {
         switch (playerType) {

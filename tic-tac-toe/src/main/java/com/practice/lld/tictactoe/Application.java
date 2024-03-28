@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {
@@ -54,8 +54,8 @@ public class Application {
 		}
 
 		if(defaultPlayers) {
-			players.add(new Human("Player", "\uD83D\uDE0E"));
-			players.add(new Bot("Bot", "\uD83E\uDD16"));
+			players.add(new Human("Shubham", "✖\uFE0F"));
+			players.add(new Bot("Bot", "\uD83D\uDEDF"));
 			return undoEnabled;
 		}
 

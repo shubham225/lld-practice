@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class GameService {
     public void startGame(Game game) {
         while(game.isInProgress()) {

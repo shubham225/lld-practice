@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/V1/tictactoe")
+//@RestController
+//@RequestMapping("/api/V1/tictactoe")
 public class GameController {
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            path = "/play"
-    )
+//    @RequestMapping(
+//            method = RequestMethod.GET,
+//            path = "/play"
+//    )
     public Board getGameBoard() {
         List<Player> playerList = new ArrayList<>();
         Player player1 = new Human("shubham", "x");
