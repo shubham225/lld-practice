@@ -3,13 +3,13 @@ package com.practice.parking.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 public class Ticket extends BaseModel {
-    private LocalDateTime entryDateTime;
-    private LocalDateTime exitDateTime;
+    private Date entryDateTime;
+    private Date exitDateTime;
     private Vehicle vehicle;
     private Slot allocatedSlot;
     private Gate entryGate;
