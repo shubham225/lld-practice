@@ -1,6 +1,7 @@
 package com.practice.parking.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
@@ -14,12 +15,12 @@ import java.util.Date;
 public class Ticket extends BaseModel {
     private Date entryDateTime;
     private Date exitDateTime;
-    @OneToOne
+    @ManyToOne
     private Vehicle vehicle;
-    @OneToOne
+    @ManyToOne
     private Slot allocatedSlot;
-    @OneToOne
+    @ManyToOne
     private Gate entryGate;
-    @OneToOne
+    @ManyToOne
     private Gate exitGate;
 }

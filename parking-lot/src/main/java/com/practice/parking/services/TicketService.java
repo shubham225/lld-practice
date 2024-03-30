@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TicketService {
@@ -43,6 +44,7 @@ public class TicketService {
         ticket.setEntryDateTime(new Date());
         ticket.setExitGate(null);
         ticket.setExitDateTime(null);
+        ticket = ticketRepository.save(ticket);
 
         slotAllocationFactory.getBestSlotAllocationStrategy().allocateSlot(ticket);
 
@@ -83,5 +85,14 @@ public class TicketService {
         }
 
         return vehicle1;
+    }
+
+    public Ticket getTicketById(UUID ticketId) {
+        Optional<Ticket> ticketOptional = ticketRepository.findById(ticketId);
+
+        if(ticketOptional.isEmpty())
+            throw new RuntimeException("Ticket not Found");
+
+        return ticketOptional.get();
     }
 }

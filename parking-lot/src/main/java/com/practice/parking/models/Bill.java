@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Bill extends BaseModel {
     @OneToOne
     private Ticket ticket;
-    private int amount;
+    private long amount;
 
     @Enumerated(EnumType.ORDINAL)
     private PaymentStatus paymentStatus;

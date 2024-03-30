@@ -11,5 +11,5 @@ public class GenerateBillResponseDto {
     private UUID ticketId;
     private UUID billId;
     private String vehicleNo;
-    private int amount;
+    private long amount;
 }
