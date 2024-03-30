@@ -3,10 +3,12 @@ package com.practice.parking.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 public class PaymentStatusResponseDto {
-    private int billId;
-    private String paymentId;
+    private UUID billId;
+    private UUID paymentId;
     private String paymentStatus;
 }
