@@ -8,10 +8,12 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Slot extends BaseModel {
+    private String name;
+    @Enumerated(EnumType.ORDINAL)
     private VehicleType supportedVehicle;
-
     @Enumerated(EnumType.ORDINAL)
     private SlotStatus status;
+
     @ManyToOne
     private Floor floor;
     @OneToOne
