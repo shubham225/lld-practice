@@ -3,6 +3,8 @@ package com.practice.parking.services;
 import com.practice.parking.dtos.FloorDataRequestDto;
 import com.practice.parking.dtos.GateDataRequestDto;
 import com.practice.parking.dtos.SlotDataRequestDto;
+import com.practice.parking.exceptions.BuildingNotFoundException;
+import com.practice.parking.exceptions.FloorNotFoundException;
 import com.practice.parking.models.*;
 import com.practice.parking.repositories.BuildingRepository;
 import com.practice.parking.repositories.FloorRepository;
@@ -61,7 +63,7 @@ public class DataService {
         Optional<Building> buildingOptional = buildingRepository.findById(buildingId);
 
         if(buildingOptional.isEmpty())
-            throw new RuntimeException("Building Not Found");
+            throw new BuildingNotFoundException("Building with id '" + buildingId + "' Not Found");
 
         gate.setBuilding(buildingOptional.get());
 
@@ -93,7 +95,7 @@ public class DataService {
         Optional<Floor> floorOptional = floorRepository.findById(slotDataDto.getFloorId());
 
         if(floorOptional.isEmpty())
-            throw new RuntimeException("Floor not Found");
+            throw new FloorNotFoundException("Floor with id '" + slotDataDto.getFloorId() + "' not Found");
 
         slot.setFloor(floorOptional.get());
 
@@ -123,7 +125,7 @@ public class DataService {
         Optional<Building> buildingOptional = buildingRepository.findById(floorDataDto.getBuildingId());
 
         if(buildingOptional.isEmpty())
-            throw new RuntimeException("Building Not Found");
+            throw new BuildingNotFoundException("Building with id '" + floorDataDto.getBuildingId() + "' Not Found");
 
         floor.setBuilding(buildingOptional.get());
 

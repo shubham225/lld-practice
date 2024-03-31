@@ -3,6 +3,7 @@ package com.practice.parking.services;
 import com.practice.parking.dtos.GenerateTicketRequestDto;
 import com.practice.parking.dtos.GenerateTicketResponseDto;
 import com.practice.parking.dtos.VehicleDto;
+import com.practice.parking.exceptions.TicketNotFoundException;
 import com.practice.parking.models.Gate;
 import com.practice.parking.models.Slot;
 import com.practice.parking.models.Ticket;
@@ -91,7 +92,7 @@ public class TicketService {
         Optional<Ticket> ticketOptional = ticketRepository.findById(ticketId);
 
         if(ticketOptional.isEmpty())
-            throw new RuntimeException("Ticket not Found");
+            throw new TicketNotFoundException("Ticket with id '" + ticketId + "' not Found");
 
         return ticketOptional.get();
     }

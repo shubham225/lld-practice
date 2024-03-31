@@ -1,5 +1,6 @@
 package com.practice.parking.services;
 
+import com.practice.parking.exceptions.GateNotFoundException;
 import com.practice.parking.models.Gate;
 import com.practice.parking.repositories.GateRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class GateService {
         Optional<Gate> gateOptional = gateRepository.findById(gateId);
 
         if(gateOptional.isEmpty())
-            throw new RuntimeException("Gate not Found");
+            throw new GateNotFoundException("Gate with id '" + gateId + "' not Found");
 
         return gateOptional.get();
     }

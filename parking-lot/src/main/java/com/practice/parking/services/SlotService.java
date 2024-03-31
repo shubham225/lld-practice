@@ -14,12 +14,11 @@ public class SlotService {
         this.slotRepository = slotRepository;
     }
 
-    public boolean releaseSlot(Slot slot) {
+    public void releaseSlot(Slot slot) {
         slot.setStatus(SlotStatus.AVAILABLE);
         slot.setVehicle(null);
 
         slot = slotRepository.save(slot);
 
-        return true;
     }
 }

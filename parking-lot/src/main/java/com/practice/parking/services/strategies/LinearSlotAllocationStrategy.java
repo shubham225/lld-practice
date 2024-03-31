@@ -1,5 +1,7 @@
 package com.practice.parking.services.strategies;
 
+import com.practice.parking.exceptions.FloorNotFoundException;
+import com.practice.parking.exceptions.SlotNotFoundException;
 import com.practice.parking.models.*;
 import com.practice.parking.repositories.FloorRepository;
 import com.practice.parking.repositories.SlotRepository;
@@ -28,13 +30,13 @@ public class LinearSlotAllocationStrategy implements SlotAllocationStrategy {
         Optional<List<Floor>> floorsOptional = floorRepository.findAllByBuilding(building);
 
         if(floorsOptional.isEmpty())
-            throw new RuntimeException("Building has no floors setup");
+            throw new FloorNotFoundException("No parking floors found in Building - " + building.getName());
 
         for(Floor floor : floorsOptional.get()) {
             Optional<List<Slot>> slotsOptional = slotRepository.findAllByFloor(floor);
 
             if(slotsOptional.isEmpty())
-                throw new RuntimeException("Building has no floors setup");
+                throw new SlotNotFoundException("No Slots found on Floor - " + floor.getName());
 
             for(Slot slot : slotsOptional.get()) {
                 if(slot.getStatus() == SlotStatus.AVAILABLE &&
