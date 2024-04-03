@@ -1,0 +1,8 @@
+#Server Configurations
+server:
+  port: 9030
+
+# Spring Configurations
+spring:
+  application:
+    name: forum
