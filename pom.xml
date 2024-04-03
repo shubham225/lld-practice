@@ -11,6 +11,7 @@
     <modules>
         <module>tic-tac-toe</module>
         <module>parking-lot</module>
+        <module>message-board</module>
     </modules>
 
     <properties>
