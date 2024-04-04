@@ -1,6 +1,7 @@
 package com.practice.forum.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
@@ -18,6 +19,6 @@ public class Post extends BaseModel{
     @ManyToOne
     private User createdBy;
     private Date createdAt;
-    @OneToOne
+    @ManyToOne
     private Post replyTo;
 }

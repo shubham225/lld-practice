@@ -6,6 +6,7 @@ import com.practice.forum.models.Thread;
 import com.practice.forum.models.User;
 import com.practice.forum.services.ThreadService;
 import com.practice.forum.services.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class ThreadController {
             method = RequestMethod.POST,
             path = "/add"
     )
-    public Thread addThread(ThreadRequestDto threadRequestDto) {
+    public Thread addThread(@RequestBody ThreadRequestDto threadRequestDto) {
         return threadService.addThread(threadRequestDto);
     }
 }

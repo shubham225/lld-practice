@@ -6,3 +6,13 @@ server:
 spring:
   application:
     name: forum
+  # Database Configurations
+  datasource:
+    url: ${FORUM_DATASOURCE_URL}
+    username: ${FORUM_DB_USER}
+    password: ${FORUM_DB_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

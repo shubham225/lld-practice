@@ -5,6 +5,7 @@ import com.practice.forum.models.User;
 import com.practice.forum.repositories.UserRepository;
 import com.practice.forum.services.UserService;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class UserController {
             method = RequestMethod.POST,
             path = "/add"
     )
-    public User addUser(UserRequestDto userRequestDto) {
+    public User addUser(@RequestBody UserRequestDto userRequestDto) {
         return userService.addUser(userRequestDto);
     }
 }
