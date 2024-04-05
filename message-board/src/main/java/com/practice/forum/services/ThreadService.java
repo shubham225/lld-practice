@@ -10,6 +10,7 @@ import com.practice.forum.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,5 +49,19 @@ public class ThreadService {
         thread = threadRepository.save(thread);
 
         return thread;
+    }
+
+    public List<Thread> getThreads(Long forumId) {
+        Optional<Forum> forumOptional = forumRepository.findById(forumId);
+
+        if(forumOptional.isEmpty())
+            throw new RuntimeException("Forum not found");
+
+        Optional<List<Thread>> optionalThreads = threadRepository.findByForum(forumOptional.get());
+
+        if (optionalThreads.isEmpty())
+            throw new RuntimeException("Threads not found");
+
+        return optionalThreads.get();
     }
 }

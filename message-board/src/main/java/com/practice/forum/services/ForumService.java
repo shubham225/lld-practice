@@ -39,4 +39,13 @@ public class ForumService {
 
         return forum;
     }
+
+    public Forum getForum(long forumId) {
+        Optional<Forum> forumOptional = forumRepository.findById(forumId);
+
+        if(forumOptional.isEmpty())
+            throw new RuntimeException("Forum not found");
+
+        return forumOptional.get();
+    }
 }

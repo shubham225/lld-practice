@@ -2,14 +2,14 @@ package com.practice.forum.controllers;
 
 import com.practice.forum.dtos.PostRequestDto;
 import com.practice.forum.dtos.UserRequestDto;
+import com.practice.forum.models.Forum;
 import com.practice.forum.models.Post;
 import com.practice.forum.models.User;
 import com.practice.forum.services.PostService;
 import com.practice.forum.services.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/V1/post")
@@ -26,5 +26,13 @@ public class PostController {
     )
     public Post addUser(@RequestBody PostRequestDto postRequestDto) {
         return postService.addPost(postRequestDto);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/all/{threadId}"
+    )
+    public List<Post> getPosts(@PathVariable Long threadId) {
+        return postService.getPosts(threadId);
     }
 }

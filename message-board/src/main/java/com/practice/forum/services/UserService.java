@@ -5,6 +5,8 @@ import com.practice.forum.models.User;
 import com.practice.forum.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -23,5 +25,14 @@ public class UserService {
         user = userRepository.save(user);
 
         return user;
+    }
+
+    public User getUser(Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if(userOptional.isEmpty())
+            throw new RuntimeException("User not found");
+
+        return userOptional.get();
     }
 }

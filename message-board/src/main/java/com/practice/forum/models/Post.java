@@ -19,6 +19,4 @@ public class Post extends BaseModel{
     @ManyToOne
     private User createdBy;
     private Date createdAt;
-    @ManyToOne
-    private Post replyTo;
 }

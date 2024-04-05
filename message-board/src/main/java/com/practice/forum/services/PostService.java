@@ -10,6 +10,7 @@ import com.practice.forum.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,22 +41,25 @@ public class PostService {
         if(threadOptional.isEmpty())
             throw new RuntimeException("Thread not found");
 
-        if (postRequestDto.getReplyToPostId() != 0) {
-            Optional<Post> replyPostOptional = postRepository.findById(postRequestDto.getReplyToPostId());
-
-            if(replyPostOptional.isEmpty())
-                throw new RuntimeException("Post not found");
-
-            post.setReplyTo(replyPostOptional.get());
-        }else {
-            post.setReplyTo(null);
-        }
-
         post.setThread(threadOptional.get());
         post.setCreatedBy(userOptional.get());
         post.setCreatedAt(new Date());
 
         post = postRepository.save(post);
         return post;
+    }
+
+    public List<Post> getPosts(Long threadId) {
+        Optional<Thread> threadOptional = threadRepository.findById(threadId);
+
+        if(threadOptional.isEmpty())
+            throw new RuntimeException("Thread not found");
+
+        Optional<List<Post>> postOptional = postRepository.findByThread(threadOptional.get());
+
+        if(postOptional.isEmpty())
+            throw new RuntimeException("Post not Found");
+
+        return postOptional.get();
     }
 }
