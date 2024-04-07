@@ -1,6 +1,7 @@
 package com.practice.forum.services;
 
 import com.practice.forum.dtos.UserRequestDto;
+import com.practice.forum.exceptions.UserNotFoundException;
 import com.practice.forum.models.User;
 import com.practice.forum.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(userId);
 
         if(userOptional.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException();
 
         return userOptional.get();
     }

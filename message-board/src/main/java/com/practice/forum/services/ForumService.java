@@ -1,6 +1,8 @@
 package com.practice.forum.services;
 
 import com.practice.forum.dtos.ForumRequestDto;
+import com.practice.forum.exceptions.ForumNotFoundException;
+import com.practice.forum.exceptions.UserNotFoundException;
 import com.practice.forum.models.Forum;
 import com.practice.forum.models.User;
 import com.practice.forum.repositories.ForumRepository;
@@ -30,7 +32,7 @@ public class ForumService {
         Optional<User> userOptional = userRepository.findById(forumRequestDto.getCreatedById());
 
         if(userOptional.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException();
 
         forum.setCreatedBy(userOptional.get());
         forum.setCreatedAt(new Date());
@@ -44,7 +46,7 @@ public class ForumService {
         Optional<Forum> forumOptional = forumRepository.findById(forumId);
 
         if(forumOptional.isEmpty())
-            throw new RuntimeException("Forum not found");
+            throw new ForumNotFoundException();
 
         return forumOptional.get();
     }

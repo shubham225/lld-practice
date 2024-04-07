@@ -1,6 +1,9 @@
 package com.practice.forum.services;
 
 import com.practice.forum.dtos.PostRequestDto;
+import com.practice.forum.exceptions.PostNotFoundException;
+import com.practice.forum.exceptions.ThreadNotFoundException;
+import com.practice.forum.exceptions.UserNotFoundException;
 import com.practice.forum.models.Post;
 import com.practice.forum.models.Thread;
 import com.practice.forum.models.User;
@@ -36,10 +39,10 @@ public class PostService {
         Optional<Thread> threadOptional = threadRepository.findById(postRequestDto.getThreadId());
 
         if(userOptional.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException();
 
         if(threadOptional.isEmpty())
-            throw new RuntimeException("Thread not found");
+            throw new ThreadNotFoundException();
 
         post.setThread(threadOptional.get());
         post.setCreatedBy(userOptional.get());
@@ -53,12 +56,12 @@ public class PostService {
         Optional<Thread> threadOptional = threadRepository.findById(threadId);
 
         if(threadOptional.isEmpty())
-            throw new RuntimeException("Thread not found");
+            throw new ThreadNotFoundException();
 
         Optional<List<Post>> postOptional = postRepository.findByThread(threadOptional.get());
 
         if(postOptional.isEmpty())
-            throw new RuntimeException("Post not Found");
+            throw new PostNotFoundException();
 
         return postOptional.get();
     }

@@ -1,6 +1,9 @@
 package com.practice.forum.services;
 
 import com.practice.forum.dtos.ThreadRequestDto;
+import com.practice.forum.exceptions.ForumNotFoundException;
+import com.practice.forum.exceptions.ThreadNotFoundException;
+import com.practice.forum.exceptions.UserNotFoundException;
 import com.practice.forum.models.Forum;
 import com.practice.forum.models.Thread;
 import com.practice.forum.models.User;
@@ -37,10 +40,10 @@ public class ThreadService {
         Optional<Forum> forumOptional = forumRepository.findById(threadRequestDto.getForumId());
 
         if(userOptional.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException();
 
         if(forumOptional.isEmpty())
-            throw new RuntimeException("Forum not found");
+            throw new ForumNotFoundException();
 
         thread.setForum(forumOptional.get());
         thread.setCreatedBy(userOptional.get());
@@ -55,12 +58,12 @@ public class ThreadService {
         Optional<Forum> forumOptional = forumRepository.findById(forumId);
 
         if(forumOptional.isEmpty())
-            throw new RuntimeException("Forum not found");
+            throw new ForumNotFoundException();
 
         Optional<List<Thread>> optionalThreads = threadRepository.findByForum(forumOptional.get());
 
         if (optionalThreads.isEmpty())
-            throw new RuntimeException("Threads not found");
+            throw new ThreadNotFoundException();
 
         return optionalThreads.get();
     }
